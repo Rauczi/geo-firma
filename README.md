@@ -30,26 +30,27 @@ Arch Linux
 3. Środowisko wirtualne (zalecane — zgodnie z ArchWiki)
 
     python -m venv venv
+   
     source venv/bin/activate
 
-4. Instalacja zależności
+5. Instalacja zależności
 
     pip install -r requirements.txt
 
-5. Przygotowanie danych
+6. Przygotowanie danych
 
     Umieść plik input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto (lub zmień POSTAL_COL / CITY_COL w geokoduj.py).
-6. Uruchomienie geokodowania
+7. Uruchomienie geokodowania
 
     python geokoduj.py
 
     Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
-7. Wygenerowanie mapy
+8. Wygenerowanie mapy
 
     python mapy.py
 
     Wynik: mapa.html — otwórz w przeglądarce.
-8. Dezaktywacja środowiska (po zakończeniu pracy)
+9. Dezaktywacja środowiska (po zakończeniu pracy)
 
     deactivate
 
