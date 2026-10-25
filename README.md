@@ -19,106 +19,97 @@ Wymagania
 
 Arch Linux
 1. Instalacja Pythona i pip
-bash
 
-sudo pacman -S python python-pip
+    sudo pacman -S python python-pip
 
 2. Klonowanie repozytorium
-bash
 
-git clone https://github.com/TWOJ_LOGIN/geo-firma.git
-cd geo-firma
+    git clone https://github.com/TWOJ_LOGIN/geo-firma.git
+    cd geo-firma
 
 3. Środowisko wirtualne (zalecane — zgodnie z ArchWiki)
-bash
 
-python -m venv venv
-source venv/bin/activate
+    python -m venv venv
+    source venv/bin/activate
 
 4. Instalacja zależności
-bash
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 5. Przygotowanie danych
 
-Umieść plik input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto (lub zmień POSTAL_COL / CITY_COL w geokoduj.py).
+    Umieść plik input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto (lub zmień POSTAL_COL / CITY_COL w geokoduj.py).
 6. Uruchomienie geokodowania
-bash
 
-python geokoduj.py
+    python geokoduj.py
 
-Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
+    Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
 7. Wygenerowanie mapy
-bash
 
-python mapy.py
+    python mapy.py
 
-Wynik: mapa.html — otwórz w przeglądarce.
+    Wynik: mapa.html — otwórz w przeglądarce.
 8. Dezaktywacja środowiska (po zakończeniu pracy)
-bash
 
-deactivate
+    deactivate
 
 Windows
 1. Instalacja Pythona
 
-Pobierz instalator ze strony python.org i zaznacz opcję „Add Python to PATH" podczas instalacji.
+    Pobierz instalator ze strony python.org i zaznacz opcję „Add Python to PATH" podczas instalacji.
 
-Sprawdź w PowerShell:
-powershell
+    Sprawdź w PowerShell:
+    powershell
 
-python --version
-pip --version
+    python --version
+    pip --version
 
 2. Klonowanie repozytorium
-powershell
+    powershell
 
-git clone https://github.com/TWOJ_LOGIN/geo-firma.git
-cd geo-firma
-
-    Jeśli nie masz git, możesz pobrać repozytorium jako ZIP i rozpakować.
+  do  >cd geo-firma
 
 3. Środowisko wirtualne
-powershell
+    powershell
 
-python -m venv venv
-venv\Scripts\activate
+    py -m venv venv
+    venv\Scripts\activate
 
-Po aktywacji w promptcie pojawi się (venv).
+    Po aktywacji w promptcie pojawi się (venv).
 4. Instalacja zależności
-powershell
+    powershell
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 5. Przygotowanie danych
 
-Umieść input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto.
-6. Uruchomienie geokodowania
-powershell
+    Umieść input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto.
+   
+7. Uruchomienie geokodowania
+    powershell
 
-python geokoduj.py
+    py geokoduj.py
 
 7. Wygenerowanie mapy
-powershell
+    powershell
 
-python mapy.py
+    python mapy.py
 
-Otwórz mapa.html w przeglądarce.
+    Otwórz mapa.html w przeglądarce.
 8. Dezaktywacja środowiska
-powershell
+    powershell
 
-deactivate
+    deactivate
 
-Plik requirements.txt
+    Plik requirements.txt
 
-W katalogu projektu utwórz plik requirements.txt z zawartością:
-txt
+    W katalogu projektu utwórz plik requirements.txt z zawartością:
+    txt
 
-pandas
-openpyxl
-geopy
-folium
+    pandas
+    openpyxl
+    geopy
+    folium
 
     Wersje nie są przypięte — jeśli chcesz je ustabilizować, użyj pip freeze > requirements.txt po instalacji.
 
