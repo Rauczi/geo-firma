@@ -37,8 +37,7 @@ Arch Linux
 
 3. Środowisko wirtualne (zalecane — zgodnie z ArchWiki)
 
-    python -m venv venv
-   
+    python -m venv venv   
     source venv/bin/activate
 
 5. Instalacja zależności
