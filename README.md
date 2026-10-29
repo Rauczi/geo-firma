@@ -3,21 +3,29 @@ Geokodowanie adresów pracowników → mapa
 
 Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera współrzędne geograficzne przez Nominatim (OpenStreetMap) i generuje:
 
-    output.xlsx — dane wejściowe + kolumny szerokosc, dlugosc, status,
+   geokoduj.py >> output.xlsx — dane wejściowe + kolumny szerokosc, dlugosc, status,
 
-    mapa.html — interaktywną mapę z kropkami, etykietami (imię i nazwisko) i popupami (kod, miejscowość, współrzędne).
+   mapy.py >> mapa.html — interaktywną mapę z kropkami, etykietami (imię i nazwisko) i popupami (kod, miejscowość, współrzędne).
 
-    Uwaga o danych wrażliwych: skrypt wysyła do Nominatim wyłącznie kod pocztowy i miejscowość — nigdy imię, nazwisko, ulicę ani numer domu. Przed uruchomieniem zapoznaj się z polityką Nominatim (limit 1 żądanie/s, wymagany User-Agent).
+
+UWAGA! Należy przygotować plik wsadowy "input.xlsx" nie wolno zmieniać jego nazwy oraz nazw w wierszu 1.
 
 Wymagania
 
-    Python 3.10+
+    Python 3.10+ <<Należy go zainstalować przed uruchomieniem>>
 
     Połączenie z Internetem (Nominatim + kafle mapy)
 
     Plik input.xlsx z kolumnami: kod, miasto (oraz dowolnymi innymi — zostaną przepisane do wyniku)
 
+# Uruchomienie
+
+1. Pobieramy całe repozytorium Github, rozpakowujemy do dodwolnego folderu
+2. Uruchamianie przy pomocy komend (poniżej) w terminalu dla Linux ; w PowerShell dla Windows
+
+
 Arch Linux
+
 1. Instalacja Pythona i pip
 
     sudo pacman -S python python-pip
@@ -55,108 +63,67 @@ Arch Linux
     deactivate
 
 Windows
-1. Instalacja Pythona
 
-    Pobierz instalator ze strony python.org i zaznacz opcję „Add Python to PATH" podczas instalacji.
-
-    Sprawdź w PowerShell:
-    powershell
-
-    python --version
-    pip --version
-
-2. Klonowanie repozytorium
-    powershell
-
-  do  >cd geo-firma
-
-3. Środowisko wirtualne
-    powershell
-
-    py -m venv venv
-    venv\Scripts\activate
+1. Środowisko wirtualne "POWERSHELL"
+   
+    py -m venv .venv
+    .venv\Scripts\activate
 
     Po aktywacji w promptcie pojawi się (venv).
-4. Instalacja zależności
-    powershell
+2. Instalacja zależności
 
     pip install -r requirements.txt
 
-5. Przygotowanie danych
+3. Aktualizacja pip
+
+   python.exe -m pip install --upgrade pip 
+
+4. Przygotowanie danych
 
     Umieść input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto.
    
 7. Uruchomienie geokodowania
-    powershell
-
+ 
     py geokoduj.py
 
 7. Wygenerowanie mapy
-    powershell
 
-    python mapy.py
+    py mapy.py   >>>> generuje plik mapa.html
 
     Otwórz mapa.html w przeglądarce.
-8. Dezaktywacja środowiska
-    powershell
 
+8. Dezaktywacja środowiska
+ 
     deactivate
 
-    Plik requirements.txt
+# Zasady prywatności i ochrony danych   
 
-    W katalogu projektu utwórz plik requirements.txt z zawartością:
-    txt
+    Uwaga o danych wrażliwych: skrypt wysyła do Nominatim wyłącznie kod pocztowy i 	miejscowość — nigdy imię, nazwisko, ulicę ani numer domu. Przed uruchomieniem 	zapoznaj się z polityką Nominatim (limit 1 żądanie/s, wymagany User-Agent).
 
-    pandas
-    openpyxl
-    geopy
-    folium
+1. geokoduj.py korzysta z pliku input,xlsx
+	
+	Na serwer wysyłany jest kod pocztowy i miejscowość bez imienia i nazwiska, jednak 	dla bezpieczeństwa należy wpisać jedynie numer osobowy.
 
-    Wersje nie są przypięte — jeśli chcesz je ustabilizować, użyj pip freeze > requirements.txt po instalacji.
+2. Po wykonaniu geokoduj.py generowany jest plik output.xlsx
 
-Struktura projektu
-text
+	UWAGA Może być tak że program nie znajduje wszystkich lokalizacji, możliwe że 	trzeba będzie cześć danych wprowadzić ręcznie.
+	nawet pomimo zastosowania logiki sprawdzania:
+		1. Sprawdzany jest kod pocztowy + miejscowość < jeżeli nie znajdzie idziemy dalej
+		2. sprawdzany jest kod kod pocztowy < jeżeli nie znajdzie idziemy dalej
+		3. sprawdzana jest miejscowość < jeżeli nie znajdzie idziemy dalej
+		4. uzyskujemy wpis "nie znaleziono"
 
-geo-firma/
-├── geokoduj.py              # geokodowanie: input.xlsx → output.xlsx
-├── mapy.py                  # generowanie mapy: output.xlsx → mapa.html
-├── requirements.txt         # zależności
-├── input.xlsx               # dane wejściowe (nie commituj z danymi wrażliwymi!)
-├── output.xlsx              # wynik geokodowania (generowany)
-├── cache_geokodowanie.csv   # bufor Nominatim (generowany, nie usuwaj)
-├── mapa.html                # wynik mapy (generowany)
-└── README.md
 
-Rozwiązywanie problemów
-Problem	Rozwiązanie
-KeyError: 'kod'	Nazwy kolumn w input.xlsx nie pasują. Sprawdź POSTAL_COL / CITY_COL w geokoduj.py.
-TypeError: PatternFill.__init__() got an unexpected keyword argument 'extLst'	Plik Excel zapisany przez narzędzie niezgodne z openpyxl (np. SoftMaker). Otwórz w LibreOffice i zapisz ponownie jako .xlsx.
-UserWarning: CartoDB tiles now require an API key	Zmień tiles="OpenStreetMap" w mapy.py.
-Mapa pusta / szare tło	Otwórz mapa.html przez lokalny serwer: python -m http.server 8000 → http://localhost:8000/mapa.html. Sprawdź też, czy nie blokuje adblock.
-Popupy nie działają	Upewnij się, że popup= jest przypisany do folium.Marker (etykiety), a nie do CircleMarker.
-403 Forbidden / blokada Nominatim	Skrypt ma time.sleep(1.1) — nie usuwaj go. Nie uruchamiaj równolegle.
-Bezpieczeństwo danych
+	na podstawie wpisu "nie znaleziono" w pliki output.xlsx wiemy które adresy nie będą 	wrysowywane na mapie możemy im ręcznie nadać wartości długości i szerokości 	geograficznej.
+	
+3. Wg. powyższego uruchamiamy mapy.py która ganeruje widok mapy Polski z oznaczeniami lokalizacji wszystkich adresów.
 
-    Nie commituj input.xlsx, output.xlsx, cache_geokodowanie.csv ani mapa.html — zawierają dane osobowe. Dodaj je do .gitignore.
+	UWAGA mapy.py nie wysyła danych z excela - outpot na żaden zewnętrzny serwer, 	jedynie pobierane są kafelki mapy jako podkład
+	
+	!! jeżeli chcemy by na mapie pojawiły się imiona i nazwiska należy edytować ręcznie 	plik outpot.xlsx i za pomocą funkcji lub osobiście dopisać do każdego numeru 	osobowego - imię i nazwisko
 
-    Do Nominatim wysyłane są tylko kod pocztowy i miejscowość — bez imienia, nazwiska, ulicy i numeru domu.
+#########################################################
 
-    Przed uruchomieniem zapoznaj się z polityką użytkowania Nominatim.
+Licencja MIT
 
-Przykładowy .gitignore
-gitignore
-
-venv/
-__pycache__/
-*.pyc
-input.xlsx
-output.xlsx
-cache_geokodowanie.csv
-mapa.html
-.env
-
-Licencja
-
-Projekt do użytku wewnętrznego. Dane pochodzą z OpenStreetMap (© współtwórcy OpenStreetMap, licencja ODbL).
-
-To wszystko — możesz wrzucić tę instrukcję jako README.md do repozytorium. Jeśli chcesz, mogę też przygotować wersję angielską (przydatną, jeśli repo ma być publiczne) albo skrypt setup.sh / setup.ps1, który automatycznie tworzy venv i instaluje zależności jednym poleceniem. Daj znać! 🚀
+Stworzone przy pomocy AI - DeepSeek oraz Copilot
