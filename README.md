@@ -41,7 +41,7 @@ Arch Linux
    
 4. Uruchomienie geokodowania
 
-    python geokoduj.py
+    python geokoduj_Linux.py
 
     Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
    
