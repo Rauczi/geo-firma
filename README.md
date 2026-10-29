@@ -65,19 +65,20 @@ Windows
 
 1. Środowisko wirtualne "POWERSHELL"
    
-    py -m venv .venv
+    py -m venv .venv 
+   
     .venv\Scripts\activate
 
     Po aktywacji w promptcie pojawi się (venv).
-2. Instalacja zależności
+3. Instalacja zależności
 
     pip install -r requirements.txt
 
-3. Aktualizacja pip
+4. Aktualizacja pip
 
    python.exe -m pip install --upgrade pip 
 
-4. Przygotowanie danych
+5. Przygotowanie danych
 
     Umieść input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto.
    
