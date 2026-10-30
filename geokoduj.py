@@ -53,7 +53,7 @@ for idx, row in df.iterrows():
 
     key = (postal, city)
 
-    # 1) Sprawdzenie bufora
+    # 1) Sprawdź bufor
     if key in cache_map:
         lat, lon = cache_map[key]
 
@@ -64,86 +64,88 @@ for idx, row in df.iterrows():
         print(f"[{idx + 1}/{len(df)}] {postal} {city} -> z bufora")
         continue
 
-# 2) Zapytanie do Nominatim
+    location = None
+    status = None
 
-location = None
-status = None
+    try:
 
-# Próba 1: kod + miasto
-try:
-    location = geolocator.geocode(
-        f"{postal}, {city}, Poland",
-        timeout=10,
-        addressdetails=False
-    )
-
-    if location:
-        status = "OK (kod+miasto)"
-
-    # Próba 2: sam kod
-    if not location:
+        # Próba 1: kod + miasto
         location = geolocator.geocode(
-            f"{postal}, Poland",
+            f"{postal}, {city}, Poland",
             timeout=10,
             addressdetails=False
         )
 
         if location:
-            status = "OK (kod)"
+            status = "OK (kod+miasto)"
 
-    # Próba 3: samo miasto
-    if not location:
-        location = geolocator.geocode(
-            f"{city}, Poland",
-            timeout=10,
-            addressdetails=False
-        )
+        # Próba 2: sam kod
+        if not location:
+            location = geolocator.geocode(
+                f"{postal}, Poland",
+                timeout=10,
+                addressdetails=False
+            )
+
+            if location:
+                status = "OK (kod)"
+
+        # Próba 3: samo miasto
+        if not location:
+            location = geolocator.geocode(
+                f"{city}, Poland",
+                timeout=10,
+                addressdetails=False
+            )
+
+            if location:
+                status = "OK (miasto)"
 
         if location:
-            status = "OK (miasto)"
 
-    if location:
-        lat = location.latitude
-        lon = location.longitude
+            lat = location.latitude
+            lon = location.longitude
 
-        latitudes.append(lat)
-        longitudes.append(lon)
-        statuses.append(status)
+            latitudes.append(lat)
+            longitudes.append(lon)
+            statuses.append(status)
 
-        nowe_wpisy.append({
-            POSTAL_COL: postal,
-            CITY_COL: city,
-            "szerokosc": lat,
-            "dlugosc": lon
-        })
+            nowe_wpisy.append({
+                POSTAL_COL: postal,
+                CITY_COL: city,
+                "szerokosc": lat,
+                "dlugosc": lon
+            })
 
-        print(
-            f"[{idx+1}/{len(df)}] "
-            f"{postal} {city} -> {lat:.6f}, {lon:.6f} ({status})"
-        )
+            print(
+                f"[{idx + 1}/{len(df)}] "
+                f"{postal} {city} -> "
+                f"{lat:.6f}, {lon:.6f} ({status})"
+            )
 
-    else:
+        else:
+
+            latitudes.append(None)
+            longitudes.append(None)
+            statuses.append("Nie znaleziono")
+
+            print(
+                f"[{idx + 1}/{len(df)}] "
+                f"{postal} {city} -> NIE ZNALEZIONO"
+            )
+
+    except (GeocoderTimedOut, GeocoderServiceError) as e:
+
         latitudes.append(None)
         longitudes.append(None)
-        statuses.append("Nie znaleziono")
+        statuses.append(f"Błąd: {e}")
 
         print(
-            f"[{idx+1}/{len(df)}] "
-            f"{postal} {city} -> NIE ZNALEZIONO"
+            f"[{idx + 1}/{len(df)}] "
+            f"{postal} {city} -> BŁĄD: {e}"
         )
 
-except (GeocoderTimedOut, GeocoderServiceError) as e:
-
-    latitudes.append(None)
-    longitudes.append(None)
-    statuses.append(f"Błąd: {e}")
-
-    print(
-        f"[{idx+1}/{len(df)}] "
-        f"{postal} {city} -> BŁĄD: {e}"
-    )
-
-    # Wymog Nominatim: maks. 1 zapytanie/s
+    # Wymóg Nominatim
     time.sleep(1.1)
 
 # ========== Zapis wyników ==========
