@@ -34,60 +34,28 @@ m = folium.Map(location=[center_lat, center_lon], zoom_start=8, tiles="OpenStree
 import xyzservices.providers as xyz
 m = folium.Map(location=[center_lat, center_lon], zoom_start=8, tiles=xyz.Esri.WorldGrayCanvas)
 
-# ========== Dodanie punktów ==========
-for _, row in df_map.iterrows():
-    lat = row[LAT_COL]
-    lon = row[LON_COL]
-    name = str(row[NAME_COL]).strip()
-    status = str(row[STATUS_COL]).strip()
+# ========= Dodawanie punktów =========
 
-    # Treść etykiety (imię i nazwisko)
-    label_html = f'<div style="font-size: 13px; color: #333; font-weight: bold; white-space: nowrap;">{name}</div>'
+grupy = df_map.groupby(
+    ["szerokosc", "dlugosc"]
+)
 
-    # Użyj DivIcon, aby wyświetlić tekst bezpośrednio na mapie (bez klikania)
-for _, row in df_map.iterrows():
-    lat = row[LAT_COL]
-    lon = row[LON_COL]
-    name = str(row[NAME_COL]).strip()
-    status = str(row[STATUS_COL]).strip()
-    kod = str(row.get("kod", "")).strip()
-    miasto = str(row.get("miasto", "")).strip()
+for (lat, lon), grupa in grupy:
 
-    popup_html = f"""
-    <b>{name}</b><br>
-    Kod pocztowy: {kod}<br>
-    Miejscowość: {miasto}<br>
-    Szerokość: {lat:.6f}<br>
-    Długość: {lon:.6f}<br>
-    Status: {status}
-    """
+    popup = ""
 
-    # Kropka – bez popup, tylko znacznik wizualny
-    folium.CircleMarker(
-        location=[lat, lon],
-        radius=6,
-        color="#d62728",
-        fill=True,
-        fill_color="#d62728",
-        fill_opacity=0.9,
-    ).add_to(m)
+    for _, row in grupa.iterrows():
 
-    # Etykieta – tutaj przypisujemy popup, bo ten marker jest na wierzchu i przechwytuje kliknięcia
-    label_html = (
-        f'<div style="font-size: 12px; color: #222; font-weight: bold; '
-        f'white-space: nowrap; text-shadow: 1px 1px 2px white;">{name}</div>'
-    )
+        popup += (
+            f"{row['nrosobowy']} "
+            f"{row['imie_nazwisko']}<br>"
+        )
+
     folium.Marker(
-        location=[lat, lon],
-        icon=folium.DivIcon(
-            html=label_html,
-            icon_size=(160, 20),
-            icon_anchor=(-10, 10),
-        ),
-        popup=folium.Popup(popup_html, max_width=300),  # ← popup tutaj
+        [lat, lon],
+        popup=folium.Popup(popup, max_width=400)
     ).add_to(m)
 
+# ========= Zapis =========
 
-# ========== Zapis ==========
 m.save(OUTPUT_HTML)
-print(f"Zapisano mapę do: {OUTPUT_HTML}")
