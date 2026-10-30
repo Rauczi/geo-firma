@@ -1,4 +1,4 @@
-# geo-firma
+# geo-firma wymaga aktualizacji o nowe mapy.py i wymaga testów
 Geokodowanie adresów pracowników → mapa
 
 Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera współrzędne geograficzne przez Nominatim (OpenStreetMap) i generuje:
