@@ -96,8 +96,8 @@ Windows pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,
 	
 3. Wg. powyższego uruchamiamy mapy.py która ganeruje widok mapy Polski z oznaczeniami lokalizacji wszystkich adresów.
 
-	UWAGA mapy.py nie wysyła danych z excela - outpot na żaden zewnętrzny serwer
-	Mapa generwoana jest na komputerze 	jedynie pobierane są kafelki mapy jako podkład
+	UWAGA mapy.py nie wysyła danych z excela - output na żaden zewnętrzny serwer
+	Mapa generowana jest na komputerze 	jedynie pobierane są kafelki mapy jako podkład
 
 
 
