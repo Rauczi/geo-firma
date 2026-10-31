@@ -8,7 +8,7 @@ Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera ws
    mapy.py >> mapa.html — interaktywną mapę z kropkami, etykietami (imię i nazwisko) i popupami (kod, miejscowość, współrzędne).
 
 
-UWAGA! Należy przygotować plik wsadowy "input.xlsx" nie wolno zmieniać jego nazwy oraz nazw w wierszu 1.
+	UWAGA! Należy przygotować plik wsadowy "input.xlsx" nie wolno zmieniać jego nazwy oraz nazw w wierszu 1.
 
 Wymagania
 
@@ -25,7 +25,9 @@ Wymagania
 
 
 
-Arch Linux pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,6
+Arch Linux pierwsze uruchomienie
+
+	UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,6
 
 1. Środowisko wirtualne
    
@@ -56,7 +58,9 @@ Arch Linux pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4
 
     deactivate
 
-Windows pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,6
+Windows pierwsze uruchomienie
+
+	UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,6
 
 1. Środowisko wirtualne "POWERSHELL"
    
