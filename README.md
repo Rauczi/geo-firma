@@ -1,4 +1,4 @@
-# geo-firma wymaga aktualizacji o nowe mapy.py i wymaga testów
+# geo-firma
 Geokodowanie adresów pracowników → mapa
 
 Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera współrzędne geograficzne przez Nominatim (OpenStreetMap) i generuje:
@@ -26,38 +26,48 @@ Wymagania
 
 Arch Linux
 
-1. Środowisko wirtualne
+1. Konsola i lokalizacja
+
+    Otwieramy konsolę
+   	Przechodzimy do folderu w którym mamy folder z programem: cd /ścieżka/do/geo-firma
+   
+2. Środowisko wirtualne
    
     python -m venv venv   
     source venv/bin/activate
 
-2. Instalacja zależności
+3. Instalacja zależności
 
     pip install -r requirements.txt
 
-3. Przygotowanie danych
+4. Przygotowanie danych
 
     Umieść plik input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto (lub zmień POSTAL_COL / CITY_COL w geokoduj.py).
    
-4. Uruchomienie geokodowania
+5. Uruchomienie geokodowania
 
     python geokoduj_Linux.py
 
     Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
    
-5. Wygenerowanie mapy
+6. Wygenerowanie mapy
 
     python mapy.py
 
     Wynik: mapa.html — otwórz w przeglądarce.
    
-6. Dezaktywacja środowiska (po zakończeniu pracy)
+7. Dezaktywacja środowiska (po zakończeniu pracy)
 
     deactivate
 
 Windows
 
-1. Środowisko wirtualne "POWERSHELL"
+1. Konsola i lokalizacja
+
+    Otwieramy Powershell
+   	Przechodzimy do folderu w którym mamy folder z programem: cd /ścieżka/do/geo-firma
+
+2. Środowisko wirtualne "POWERSHELL"
    
     py -m venv .venv 
    
