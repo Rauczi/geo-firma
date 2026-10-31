@@ -1,4 +1,0 @@
-1. Podmienić plik geokoduj w repozytorium Github
-2. Przetestować na linuxie
-3. Ponownie przetestować na windows
-4. Uzupełnić readme na zakończenie projektu
