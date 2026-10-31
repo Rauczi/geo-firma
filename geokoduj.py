@@ -146,7 +146,7 @@ for idx, row in df.iterrows():
         )
 
     # Wymóg Nominatim
-    time.sleep(1.1)
+    time.sleep(1.5)
 
 # ========== Zapis wyników ==========
 df["szerokosc"] = latitudes
