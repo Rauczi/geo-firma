@@ -28,7 +28,7 @@ Arch Linux
 
 1. Konsola i lokalizacja
 
-    Otwieramy konsolę
+    Otwieramy konsolę \
     Przechodzimy do folderu w którym mamy folder z programem: cd /ścieżka/do/geo-firma
    
 3. Środowisko wirtualne
