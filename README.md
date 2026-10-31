@@ -1,7 +1,7 @@
-# geo-firma wymaga aktualizacji o nowe mapy.py i wymaga testów
+# geo-firma
 Geokodowanie adresów pracowników → mapa
 
-Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera współrzędne geograficzne przez Nominatim (OpenStreetMap) i generuje:
+Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera współrzędne bez wysyłania danych typu imię i nazwisko na jakikolwiek serwer, efektem działania jest wygenerowana lista "output" z danymi geolokalizacyjnymi miejscowości zamieszkania (nie ulicy i numeru domu):
 
    geokoduj.py >> output.xlsx — dane wejściowe + kolumny szerokosc, dlugosc, status,
 
@@ -33,17 +33,17 @@ Arch Linux
 
 2. Instalacja zależności
 
-    pip install -r requirements.txt
-
+    pip install -r requirements.txt\
+    python -m pip install --upgrade pip 
 3. Przygotowanie danych
 
     Umieść plik input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto (lub zmień POSTAL_COL / CITY_COL w geokoduj.py).
    
 4. Uruchomienie geokodowania
 
-    python geokoduj_Linux.py
+    python geokoduj.py
 
-    Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
+    Wynik: output.xlsx
    
 5. Wygenerowanie mapy
 
@@ -92,29 +92,13 @@ Windows
 
 # Zasady prywatności i ochrony danych   
 
-    Uwaga o danych wrażliwych: skrypt wysyła do Nominatim wyłącznie kod pocztowy i 	miejscowość — nigdy imię, nazwisko, ulicę ani numer domu. Przed uruchomieniem 	zapoznaj się z polityką Nominatim (limit 1 żądanie/s, wymagany User-Agent).
-
-1. geokoduj.py korzysta z pliku input,xlsx
-	
-	Na serwer wysyłany jest kod pocztowy i miejscowość bez imienia i nazwiska, jednak 	dla bezpieczeństwa należy wpisać jedynie numer osobowy.
-
-2. Po wykonaniu geokoduj.py generowany jest plik output.xlsx
-
-	UWAGA Może być tak że program nie znajduje wszystkich lokalizacji, możliwe że 	trzeba będzie cześć danych wprowadzić ręcznie.
-	nawet pomimo zastosowania logiki sprawdzania:
-		1. Sprawdzany jest kod pocztowy + miejscowość < jeżeli nie znajdzie idziemy dalej
-		2. sprawdzany jest kod kod pocztowy < jeżeli nie znajdzie idziemy dalej
-		3. sprawdzana jest miejscowość < jeżeli nie znajdzie idziemy dalej
-		4. uzyskujemy wpis "nie znaleziono"
-
-
-	na podstawie wpisu "nie znaleziono" w pliki output.xlsx wiemy które adresy nie będą 	wrysowywane na mapie możemy im ręcznie nadać wartości długości i szerokości 	geograficznej.
 	
 3. Wg. powyższego uruchamiamy mapy.py która ganeruje widok mapy Polski z oznaczeniami lokalizacji wszystkich adresów.
 
-	UWAGA mapy.py nie wysyła danych z excela - outpot na żaden zewnętrzny serwer, 	jedynie pobierane są kafelki mapy jako podkład
-	
-	!! jeżeli chcemy by na mapie pojawiły się imiona i nazwiska należy edytować ręcznie 	plik outpot.xlsx i za pomocą funkcji lub osobiście dopisać do każdego numeru 	osobowego - imię i nazwisko
+	UWAGA mapy.py nie wysyła danych z excela - outpot na żaden zewnętrzny serwer
+	Mapa generwoana jest na komputerze 	jedynie pobierane są kafelki mapy jako podkład
+
+
 
 #########################################################
 
