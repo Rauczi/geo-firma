@@ -131,7 +131,7 @@ for idx, row in df.iterrows():
         )
 
     # Wymóg Nominatim: maks. 1 zapytanie/s — POZA try/except, po każdym rekordzie
-    time.sleep(1.1)
+    time.sleep(1.5)
 
 # ========== Zapis wyników ==========
 df["szerokosc"] = latitudes
