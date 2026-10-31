@@ -24,7 +24,8 @@ Wymagania
 2. Uruchamianie przy pomocy komend (poniżej) w terminalu dla Linux ; w PowerShell dla Windows
 
 
-Arch Linux
+
+Arch Linux pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,6
 
 1. Środowisko wirtualne
    
@@ -55,7 +56,7 @@ Arch Linux
 
     deactivate
 
-Windows
+Windows pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,6
 
 1. Środowisko wirtualne "POWERSHELL"
    
