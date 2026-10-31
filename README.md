@@ -64,7 +64,7 @@ Windows pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,
    
     .venv\Scripts\activate
 
-    Po aktywacji w promptcie pojawi się (venv).
+    	Po aktywacji w promptcie pojawi się (venv).
 3. Instalacja zależności
 
     pip install -r requirements.txt
@@ -85,7 +85,7 @@ Windows pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4,5,
 
     py mapy.py   >>>> generuje plik mapa.html
 
-    Otwórz mapa.html w przeglądarce.
+    	Otwórz mapa.html w przeglądarce.
 
 8. Dezaktywacja środowiska
  
