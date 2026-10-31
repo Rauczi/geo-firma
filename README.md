@@ -44,13 +44,13 @@ Arch Linux pierwsze uruchomienie >> UWAGA Kolejne uruchamianie tylko kroki 1,3,4
 
     python geokoduj.py
 
-    Wynik: output.xlsx
+    	Wynik: output.xlsx
    
 5. Wygenerowanie mapy
 
     python mapy.py
 
-    Wynik: mapa.html — otwórz w przeglądarce.
+    	Wynik: mapa.html — otwórz w przeglądarce.
    
 6. Dezaktywacja środowiska (po zakończeniu pracy)
 
