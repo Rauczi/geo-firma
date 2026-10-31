@@ -29,34 +29,34 @@ Arch Linux
 1. Konsola i lokalizacja
 
     Otwieramy konsolę
-   	Przechodzimy do folderu w którym mamy folder z programem: cd /ścieżka/do/geo-firma
+    Przechodzimy do folderu w którym mamy folder z programem: cd /ścieżka/do/geo-firma
    
-2. Środowisko wirtualne
+3. Środowisko wirtualne
    
     python -m venv venv   
     source venv/bin/activate
 
-3. Instalacja zależności
+4. Instalacja zależności
 
     pip install -r requirements.txt
 
-4. Przygotowanie danych
+5. Przygotowanie danych
 
     Umieść plik input.xlsx w katalogu projektu. Kolumny muszą nazywać się dokładnie kod i miasto (lub zmień POSTAL_COL / CITY_COL w geokoduj.py).
    
-5. Uruchomienie geokodowania
+6. Uruchomienie geokodowania
 
     python geokoduj_Linux.py
 
     Wynik: output.xlsx oraz cache_geokodowanie.csv (bufor — nie usuwaj).
    
-6. Wygenerowanie mapy
+7. Wygenerowanie mapy
 
     python mapy.py
 
     Wynik: mapa.html — otwórz w przeglądarce.
    
-7. Dezaktywacja środowiska (po zakończeniu pracy)
+8. Dezaktywacja środowiska (po zakończeniu pracy)
 
     deactivate
 
