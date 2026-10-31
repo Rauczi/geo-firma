@@ -1,4 +1,4 @@
-# geo-firma
+# geo-firma - Wersja Finalna
 Geokodowanie adresów pracowników → mapa
 
 Skrypt wczytuje plik Excel z adresami (kod pocztowy + miejscowość), pobiera współrzędne bez wysyłania danych typu imię i nazwisko na jakikolwiek serwer, efektem działania jest wygenerowana lista "output" z danymi geolokalizacyjnymi miejscowości zamieszkania (nie ulicy i numeru domu):
