@@ -25,7 +25,7 @@ Wymagania
 
 
 Arch Linux
-
+UWAGA: po pierwszym uruchomieniu kolejne włacznia wymaganają jedynie kroków 1;2;5;6;7;8
 1. Konsola i lokalizacja
 
     Otwieramy konsolę \
@@ -61,7 +61,7 @@ Arch Linux
     deactivate
 
 Windows
-
+UWAGA: po pierwszym uruchomieniu kolejne włacznia wymaganają jedynie kroków 1;2;5;6;7;8
 1. Konsola i lokalizacja
 
     Otwieramy Powershell
